@@ -59,7 +59,7 @@
         kind: VirtualMachineSnapshot
         namespace: 'namespace-{{ user }}'
         definition:
-          apiVersion: snapshot.kubevirt.io/v1alpha1
+          apiVersion: snapshot.kubevirt.io/v1beta1
           kind: VirtualMachineSnapshot
           metadata:
             name: exercise7-snapshot
@@ -96,7 +96,7 @@
         state: present
         definition:
           spec:
-            running: false
+            runStrategy: Halted
       register: stopvm
       until: stopvm is succeeded
       retries: 60
@@ -118,7 +118,7 @@
         kind: VirtualMachineRestore
         namespace: 'namespace-{{ user }}'
         definition:
-          apiVersion: snapshot.kubevirt.io/v1alpha1
+          apiVersion: snapshot.kubevirt.io/v1beta1
           kind: VirtualMachineRestore
           metadata:
             name: restore-exercise7-snapshot
@@ -137,7 +137,7 @@
         state: present
         definition:
           spec:
-            running: true
+            runStrategy: Always
       register: startvm
       until: startvm is succeeded
       retries: 60

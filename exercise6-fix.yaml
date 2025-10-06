@@ -93,7 +93,7 @@
         state: present
         definition:
           spec:
-            running: false
+            runStrategy: Halted
       register: stopvm
       until: stopvm is succeeded
       retries: 60
@@ -128,7 +128,7 @@
         state: present
         definition:
           spec:
-            running: true
+            runStrategy: Always
       register: startvm
       until: startvm is succeeded
       retries: 60
